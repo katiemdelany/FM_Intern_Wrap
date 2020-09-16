@@ -44,7 +44,7 @@ def main():
 
     #if user input is AA 
     if args.AA:
-        logging.info("Creating new directory for amino acid target run')
+        logging.info("Creating new directory for amino acid target run")
         aa_path = '~/HybPiper/test_dataset/aa_run/'
         os.mkdir(aa_path)
         os.chdir(aa_path)
