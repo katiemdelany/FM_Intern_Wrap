@@ -25,7 +25,7 @@ args = check_arg(sys.argv[1:])
 
 
 def main():
-
+## need to specify paths for each run eventually (mkdir --> chdir) 
     if args.trim:
         os.chdir("~/HybPiper/test_dataset/")
         logging.info('Trimming input reads')
@@ -34,12 +34,20 @@ def main():
 
     #if user input is dna
     if args.dna:
+        logging.info("Creating new directory for dna target run")
+        dna_path = '~/HybPiper/test_dataset/dna_run/'
+        os.mkdir(dna_path)
+        os.chdir(dna_path)
         logging.info('Running DNA target script')
         runDNAcmd = './run_DNA.sh'
         os.system(runDNAcmd) #adjust DNA shell as needed
 
     #if user input is AA 
     if args.AA:
+        logging.info("Creating new directory for amino acid target run')
+        aa_path = '~/HybPiper/test_dataset/aa_run/'
+        os.mkdir(aa_path)
+        os.chdir(aa_path)
         logging.info('Running amino acid target script')
         runAAcmd = './run_AA.sh'
         os.system(runAAcmd)
