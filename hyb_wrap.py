@@ -25,6 +25,9 @@ args = check_arg(sys.argv[1:])
 
 
 def main():
+## Get namelist.txt first
+    namelist_cmd = 'python3 getNameList.py'
+    os.system(namelist_cmd)
 ## need to specify paths for each run eventually (mkdir --> chdir) 
     if args.trim:
         os.chdir("~/HybPiper/test_dataset/")
