@@ -1,6 +1,7 @@
 import os
 from os import listdir
 from os.path import isfile, join
+##Need to edit paths out --> will set to current directory (whichever directory input fastq files are in (should be output of trimmomatic)
 mypath = "C:\\Users\\katie\\OneDrive\\Desktop\\LoyolaFall2020\\Internship\\TestNameList\\"
 outpath = "C:\\Users\\katie\\OneDrive\\Desktop\\LoyolaFall2020\\Internship\\"
 os.chdir(mypath) 
