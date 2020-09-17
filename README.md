@@ -8,6 +8,9 @@
 ### Software Installation
 
 ### Script Details
+##### hyb_wrap.py
+This is the wrapper script designed to take user input and direct the pipeline to use amino acid targets or nucleotide targets. 
+
 ##### getNameList.py
 getNameList.py writes a list of sample names to a text file namelist.txt. This text file is then used in the amino acid and nucleotide HybPiper scripts. 
 
