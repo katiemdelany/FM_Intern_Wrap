@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#need to make variable to represent target file
+
 #Remove any previous runs
 parallel rm -r {} :::: namelist.txt
 
@@ -11,7 +13,7 @@ do
 done < namelist.txt
 
 #Get the seq_lengths.txt file
-python3 ../get_seq_lengths.py RS_34_Alsophila.fasta namelist.txt dna > test_seq_lengths.txt
+python3 ../get_seq_lengths.py RS_34_Alsophila.fasta namelist.txt supercontig > test_seq_lengths.txt
 
 #Test for paralogs
 while read i
