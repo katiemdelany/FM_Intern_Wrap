@@ -29,3 +29,6 @@ done < namelist.txt
 
 #Retrieve sequences -- need to change supercontig for fungi
 python3 ../retrieve_sequences.py RS_34_Alsophila.fasta . supercontig 
+
+#identify longest supercontig fastas (length of list depending on how many have the same number
+python3 findBest.py 
