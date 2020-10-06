@@ -24,6 +24,8 @@ def main():
    #return longest fasta files (most records)
     top = [i for i in result]
    # sys.stdout.write("Hello")
+    with open("tophits.txt","w") as outfile:
+        outfile.write("\n".join(str(record) for record in top))
     return(top)
 
 if __name__ == '__main__':
