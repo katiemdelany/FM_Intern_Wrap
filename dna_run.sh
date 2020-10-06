@@ -31,4 +31,7 @@ done < namelist.txt
 python3 ../retrieve_sequences.py RS_34_Alsophila.fasta . supercontig 
 
 #identify longest supercontig fastas (length of list depending on how many have the same number
+#outputs a file with "best" supercontigs
 python3 findBest.py 
+
+##Next we want to align (MUSCLE?)
