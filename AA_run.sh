@@ -25,5 +25,11 @@ do
 python3 ../intronerate.py --prefix $i
 done < namelist.txt
 
+#Retrieve sequences -- need to change supercontig for fungi
 python3 ../retrieve_sequences.py RS_34_Alsophila_AA.fasta . supercontig 
- 
+
+#identify longest supercontig fastas (length of list depending on how many have the same number
+#outputs a file with "best" supercontigs
+python3 findBest.py 
+
+##assembly and phylogenetic analysis
