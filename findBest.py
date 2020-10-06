@@ -21,8 +21,9 @@ def main():
         currcount = countFasta(filename)
         countdict[filename] = currcount
     result = getMax(countdict)
-    for i in result:
-        print(i)
+   #return top 5 longest fasta files (most records)
+    for i in range(5):
+        print(result[i])
    # sys.stdout.write("Hello")
 
 if __name__ == '__main__':
