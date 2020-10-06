@@ -24,3 +24,6 @@ while read i
 do
 python3 ../intronerate.py --prefix $i
 done < namelist.txt
+
+python3 ../retrieve_sequences.py RS_34_Alsophila_AA.fasta . supercontig 
+ 
