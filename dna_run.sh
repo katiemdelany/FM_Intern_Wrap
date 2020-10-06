@@ -28,6 +28,4 @@ python3 ../intronerate.py --prefix $i
 done < namelist.txt
 
 #Retrieve sequences -- need to change supercontig for fungi
-while read i do
 python3 ../retrieve_sequences.py RS_34_Alsophila.fasta . supercontig 
-done 
