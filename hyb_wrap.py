@@ -19,15 +19,23 @@ def check_arg(args=None):
             help = 'Run BLASTX pipe if targets are amino acid sequences')
     parser.add_argument('--trim', action='store_true', default=False,
             help = 'Clean fastq data using trimmomatic')
+    parser.add_argument('--dataset', actoion = 'store_true', default = True,
+            help - 'Input path of test dataset')
 
     return parser.parse_args(args)
 args = check_arg(sys.argv[1:])
 
 
 def main():
+    clone_hybpiper = 'git clone https://github.com/mossmatters/HybPiper.git'
+    os.system(clone_hybpiper)
 ## Get namelist.txt first
+## Needs to be in directory of dataset (added dataset as required user input)
+    dataset_path = args.dataset
+    os.chdir(dataset_path)
     namelist_cmd = 'python3 getNameList.py'
     os.system(namelist_cmd)
+ 
 ## need to specify paths for each run eventually (mkdir --> chdir) 
     if args.trim:
         os.chdir("~/HybPiper/test_dataset/")
