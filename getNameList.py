@@ -2,8 +2,7 @@ import os
 from os import listdir
 from os.path import isfile, join
 ##Need to edit paths out --> will set to current directory (whichever directory input fastq files are in (should be output of trimmomatic)
-mypath = "C:\\Users\\katie\\OneDrive\\Desktop\\LoyolaFall2020\\Internship\\TestNameList\\"
-outpath = "C:\\Users\\katie\\OneDrive\\Desktop\\LoyolaFall2020\\Internship\\"
+mypath = os.getcwd()
 os.chdir(mypath) 
 
 #Makes list of file names in current directory, set directory to input data
@@ -13,7 +12,7 @@ namelist = []
 #Goes through list and finds the prefix "Name" of the file, must be unique sample name
 #Adds to a list of names
 for i in onlyfiles:
-    _index = i.find('_')
+    _index = i.find('_PE')
     currname = (i[:_index])
     if currname not in namelist:
         namelist.append(currname)
