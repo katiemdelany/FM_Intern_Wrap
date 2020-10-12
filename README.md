@@ -12,7 +12,7 @@
 ##### hyb_wrap.py
 This is the wrapper script designed to take user input and direct the pipeline to use amino acid targets or nucleotide targets. 
 
-####Input for script:
+#### Input for script:
 --aa if amino acid target fasta
 --dna if nucleotide target fasta
 --dataset dataset path
