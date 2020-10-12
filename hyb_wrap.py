@@ -30,9 +30,12 @@ args = check_arg(sys.argv[1:])
 def main():
     ## Get namelist.txt first
     ## Needs to be in directory of dataset (added dataset as required user input)
+    #Moves to dataset pathway
     dataset_path = args.dataset
     os.chdir(dataset_path)
-    namelist_cmd = 'python3 getNameList.py'
+
+    #Get namelist.txt from dataset directory
+    namelist_cmd = 'python3 ../FM_Intern_Wrap/getNameList.py'
     os.system(namelist_cmd)
     
     #Clones hybpiper into current directory
