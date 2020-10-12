@@ -39,6 +39,7 @@ def main():
     os.system(namelist_cmd)
     
     #Clones hybpiper into current directory
+    os.system('../')
     clone_hybpiper = 'git clone https://github.com/mossmatters/HybPiper.git'
     os.system(clone_hybpiper)
  
