@@ -12,6 +12,12 @@
 ##### hyb_wrap.py
 This is the wrapper script designed to take user input and direct the pipeline to use amino acid targets or nucleotide targets. 
 
+####Input for script:
+--aa if amino acid target fasta
+--dna if nucleotide target fasta
+--dataset dataset path
+
+
 ##### getNameList.py
 getNameList.py writes a list of sample names to a text file namelist.txt. This text file is then used in the amino acid and nucleotide HybPiper scripts. 
 
