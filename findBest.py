@@ -31,6 +31,7 @@ def main():
     with open("tophits.txt","w") as outfile:
         outfile.write("\n".join(str(record) for record in top))
     return(top)
+##this needs to output actual files to a new directory callted tophits.. run muscle on each file in tophit. 
 
 if __name__ == '__main__':
     main()
