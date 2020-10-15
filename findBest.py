@@ -16,6 +16,9 @@ def getMax(adict):
     return(largest)
 
 def main():
+    '''
+    writes out names of longest files in a directory
+    '''
     countdict = {}
     for filename in os.listdir():
         currcount = countFasta(filename)
