@@ -18,6 +18,7 @@ def getMax(adict):
 def main():
     '''
     writes out names of longest files in a directory
+    Needs to be in directory of unaligned sequences 
     '''
     countdict = {}
     for filename in os.listdir():
