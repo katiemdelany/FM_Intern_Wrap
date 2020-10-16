@@ -35,3 +35,5 @@ python3 ../retrieve_sequences.py RS_34_Alsophila.fasta . supercontig
 python3 findBest.py 
 
 ##Next we want to align (MUSCLE?)
+##run muscle (runmuscle.sh)
+##pick phylogenetic tree program (iqtree, raxml)
