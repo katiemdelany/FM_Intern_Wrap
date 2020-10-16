@@ -33,3 +33,5 @@ python3 ../retrieve_sequences.py RS_34_Alsophila_AA.fasta . supercontig
 python3 findBest.py 
 
 ##assembly and phylogenetic analysis
+##run muscle (runmuscle.sh)
+##pick phylogenetic tree program (iqtree, raxml)
