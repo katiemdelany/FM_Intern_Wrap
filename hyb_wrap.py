@@ -30,7 +30,7 @@ args = check_arg(sys.argv[1:])
 def main():
     ## Get namelist.txt first
     ## Needs to be in directory of dataset (added dataset as required user input)
-    #Moves to dataset pathway
+    #Moves to dataset path
     dataset_path = args.dataset
     os.chdir(dataset_path)
 
@@ -38,12 +38,12 @@ def main():
     namelist_cmd = 'python3 ../FM_Intern_Wrap/getNameList.py'
     os.system(namelist_cmd)
     
-    #Clones hybpiper into current directory
-    os.system('../')
+    #Clones hybpiper one step out of current directory
+    os.system('cd ../')
     clone_hybpiper = 'git clone https://github.com/mossmatters/HybPiper.git'
     os.system(clone_hybpiper)
  
-## need to specify paths for each run eventually (mkdir --> chdir) 
+## need to specify paths for each run eventually (mkdir --> chdir)
     if args.trim:
         os.chdir("~/HybPiper/test_dataset/")
         logging.info('Trimming input reads')
@@ -53,7 +53,7 @@ def main():
     #if user input is dna
     if args.dna:
         logging.info("Creating new directory for dna target run")
-        dna_path = '~/HybPiper/test_dataset/dna_run/'
+        dna_path = 'dna_run/'
         os.mkdir(dna_path)
         os.chdir(dna_path)
         logging.info('Running DNA target script')
