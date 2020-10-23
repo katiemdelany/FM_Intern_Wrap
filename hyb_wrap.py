@@ -17,6 +17,8 @@ def check_arg(args=None):
             help = 'Run BWA pipe if targets are nucleotide sequences')
     parser.add_argument('--AA', action='store_true', dest='AA', default=False, 
             help = 'Run BLASTX pipe if targets are amino acid sequences')
+    parser.add_argument('--assembly', action='store_true', dest='assembly',default =False,
+            help = 'run exonerate on full assemblies')
     #trim won't work yet - need universal path to trimmomatic (might not work out TBD)
     parser.add_argument('--trim', action='store_true', default=False,
             help = 'Clean fastq data using trimmomatic')
@@ -69,6 +71,10 @@ def main():
         logging.info('Running amino acid target script')
         runAAcmd = './run_AA.sh'
         os.system(runAAcmd)
+        
+     #if user input is assembly
+    if arg.assembly:
+        logging.info("Running exonerate on assembly input data') 
 
 if __name__=='__main__':
     logger = logging.getLogger(__name__)
