@@ -16,15 +16,15 @@ done < namelist.txt
 python3 ../get_seq_lengths.py RS_34_Alsophila.fasta namelist.txt supercontig > test_seq_lengths.txt
 
 #Test for paralogs
-while read i
-do
-python3 ../paralog_investigator.py $i
-done < namelist.txt
+#while read i
+#do
+#python3 ../paralog_investigator.py $i
+#done < namelist.txt
 
 #Run intronerate
 while read i
 do
-python3 ../intronerate.py --prefix $i
+python3 ../exonerate_hits.py --prefix $i
 done < namelist.txt
 
 #Retrieve sequences -- need to change supercontig for fungi
