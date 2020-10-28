@@ -74,8 +74,13 @@ def main():
         
      #if user input is assembly
     if arg.assembly:
-        logging.info("Running exonerate on assembly input data') 
-
+        logging.info("Create new directory for exonerate hits")
+        assembly_out_path = 'exonerate/'
+        os.system(mkdir {}.format(assembly_out_path))
+        os.system(cd {}.format(assembly_out_path))
+        logging.info("Running exonerate on assembly input data')
+        
+                     
 if __name__=='__main__':
     logger = logging.getLogger(__name__)
     logFormatter = '%(message)s'
