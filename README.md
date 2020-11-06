@@ -13,11 +13,11 @@
 This is the wrapper script designed to take user input and direct the pipeline to use amino acid targets or nucleotide targets. 
 
 ###### Input for script:
---aa if amino acid target fasta
+--target_enrichment_data if target enrichment sequencing method 
 
---dna if nucleotide target fasta
+--whole_genome_data if data is whole genome input data 
 
---dataset dataset path
+--assembly_data if data is either a SPAdes assembly or non-SPAdes assembly
 
 
 ##### getNameList.py
