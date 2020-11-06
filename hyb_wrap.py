@@ -15,6 +15,8 @@ def check_arg(args=None):
     parser = argparse.ArgumentParser(description='Run Hybpiper for nucleotide or amino acid sequencing data')
     parser.add_argument('--target_enrichment_data', action = 'store_true',default =False,
             help = 'Input path of target enrichment data')
+    parser.add_argument('--reference_target', action = 'store_true', default = False,
+            help = 'Input path of reference target genome')
     parser.add_argument('--assembly_data', action='store_true', dest='assembly',default =False,
             help = 'Input path of assembly data')
     parser.add_argument('--whole_genome_data', actoion = 'store_true', default = True,
@@ -28,6 +30,7 @@ args = check_arg(sys.argv[1:])
 
 
 def main():
+   
     ## Get namelist.txt first
     ## Needs to be in directory of dataset (added dataset as required user input)
 
@@ -41,6 +44,8 @@ def main():
     os.system(clone_hybpiper)
 
     #if user input is target enrichment data
+    #run through hybpiper
+    path_to_target = args.reference_target  
     if args.target_enrichment_data:
         logging.info("Creating new directory for amino acid target run")
         aa_path = '~/HybPiper/test_dataset/aa_run/'
@@ -54,6 +59,7 @@ def main():
     #run through hybpiper
     #spades assembly
     #exonerate normal
+    path_to_denovo = args.whole_genome_data 
     if arg.whole_genome_data:
         logging.info("Creating new directory for whole genome data run")
         aa_path = '~/HybPiper/test_dataset/aa_run/'
@@ -64,6 +70,9 @@ def main():
         os.system(runAAcmd)
         
      #if user input is assembly
+    #check if spades, run exonerate
+    #if non-spades assembly, run Claudio's version of exonerate
+    path_to_assemblies = args.assembly_data
     if arg.assembly_data:
         #if statement to determine spades or otherwise
         logging.info("Create new directory for exonerate hits")
