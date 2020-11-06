@@ -50,8 +50,22 @@ def main():
         runAAcmd = './run_AA.sh'
         os.system(runAAcmd)
         
+    #if argument is whole genome input data
+    #run through hybpiper
+    #spades assembly
+    #exonerate normal
+    if arg.whole_genome_data:
+        logging.info("Creating new directory for whole genome data run")
+        aa_path = '~/HybPiper/test_dataset/aa_run/'
+        os.mkdir(aa_path)
+        os.chdir(aa_path)
+        logging.info('Running amino acid target script')
+        runAAcmd = './run_AA.sh'
+        os.system(runAAcmd)
+        
      #if user input is assembly
-    if arg.assembly:
+    if arg.assembly_data:
+        #if statement to determine spades or otherwise
         logging.info("Create new directory for exonerate hits")
         assembly_out_path = 'exonerate/'
         os.system(mkdir {}.format(assembly_out_path))
