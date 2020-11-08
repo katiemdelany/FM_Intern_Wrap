@@ -30,27 +30,26 @@ args = check_arg(sys.argv[1:])
 
 
 def main():
-   
-    ## Get namelist.txt first
-    ## Needs to be in directory of dataset (added dataset as required user input)
-    
-    #Get namelist.txt from dataset directory
-    namelist_cmd = 'python3 ../FM_Intern_Wrap/getNameList.py'
-    os.system(namelist_cmd)
-    
+  
     #Clones hybpiper into current directory
     clone_hybpiper = 'git clone https://github.com/mossmatters/HybPiper.git'
     os.system(clone_hybpiper)
 
     #if user input is target enrichment data
     #run through hybpiper
-    path_to_target = args.reference_target  
+    path_to_target = args.reference_target 
+    path_to_sequences = args.target_enrichment_data
     if args.target_enrichment_data:
-        logging.info("Creating new directory for amino acid target run")
-        aa_path = '~/HybPiper/test_dataset/aa_run/'
-        os.mkdir(aa_path)
-        os.chdir(aa_path)
+        os.chdir(path_to_sequences)
+        #Get namelist.txt from dataset directory
+        namelist_cmd = 'python3 ../FM_Intern_Wrap/getNameList.py'
+        os.system(namelist_cmd)
+        logging.info("Creating new directory for target enrichment hybpiper")
+        hyb_results = path_to_dataset + '/hybpiper_TE
+        os.mkdir(hyb_results)
+        os.chdir(hyb_results)
         logging.info('Running amino acid target script')
+        #run blastx version of hybpiper
         runAAcmd = './run_AA.sh'
         os.system(runAAcmd)
         
