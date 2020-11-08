@@ -38,8 +38,7 @@ def main():
     namelist_cmd = 'python3 ../FM_Intern_Wrap/getNameList.py'
     os.system(namelist_cmd)
     
-    #Clones hybpiper one step out of current directory
-    os.system('cd ../')
+    #Clones hybpiper into current directory
     clone_hybpiper = 'git clone https://github.com/mossmatters/HybPiper.git'
     os.system(clone_hybpiper)
 
