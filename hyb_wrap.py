@@ -33,7 +33,7 @@ def main():
    
     ## Get namelist.txt first
     ## Needs to be in directory of dataset (added dataset as required user input)
-
+    
     #Get namelist.txt from dataset directory
     namelist_cmd = 'python3 ../FM_Intern_Wrap/getNameList.py'
     os.system(namelist_cmd)
