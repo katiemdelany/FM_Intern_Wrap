@@ -84,6 +84,7 @@ def main():
         os.system(mkdir {}.format(assembly_out_path))
         os.system(cd {}.format(assembly_out_path))
         logging.info("Running exonerate on assembly input data')
+        os.system('./assembly_exonerate.sh '+path_to_assemblies + ' ' +path_to_target)
         
                      
 if __name__=='__main__':
