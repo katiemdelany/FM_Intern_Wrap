@@ -50,7 +50,7 @@ def main():
         os.chdir(hyb_results)
         logging.info('Running amino acid target script')
         #run blastx version of hybpiper
-        runAAcmd = './run_AA.sh'
+        runAAcmd = './run_AA.sh ' + path_to_target
         os.system(runAAcmd)
         
     #if argument is whole genome input data
@@ -67,7 +67,7 @@ def main():
         os.mkdir(de_novo)
         os.chdir(de_novo)
         logging.info('Running amino acid target script')
-        runAAcmd = './run_AA.sh'
+        runAAcmd = './run_AA.sh ' + path_to_target
         os.system(runAAcmd)
         
      #if user input is assembly
