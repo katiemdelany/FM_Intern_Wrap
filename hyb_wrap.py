@@ -19,7 +19,7 @@ def check_arg(args=None):
             help = 'Input path of reference target genome')
     parser.add_argument('--assembly_data', action='store_true', dest='assembly',default =False,
             help = 'Input path of assembly data')
-    parser.add_argument('--whole_genome_data', actoion = 'store_true', default = True,
+    parser.add_argument('--whole_genome_data', action = 'store_true', default = True,
             help - 'Input path of whole genome sequence data.')
     
   #     parser.add_argument('--trim', action='store_true', default=False,
@@ -59,10 +59,13 @@ def main():
     #exonerate normal
     path_to_denovo = args.whole_genome_data 
     if arg.whole_genome_data:
+        os.chdir(path_to_denovo)
+        namelist_cmd = 'python3 ../FM_Intern_Wrap/getNameList.py'
+        os.system(namelist_cmd)
         logging.info("Creating new directory for whole genome data run")
-        aa_path = '~/HybPiper/test_dataset/aa_run/'
-        os.mkdir(aa_path)
-        os.chdir(aa_path)
+        de_novo = path_to_denovo+ '/de_novo'
+        os.mkdir(de_novo)
+        os.chdir(de_novo)
         logging.info('Running amino acid target script')
         runAAcmd = './run_AA.sh'
         os.system(runAAcmd)
@@ -72,6 +75,9 @@ def main():
     #if non-spades assembly, run Claudio's version of exonerate
     path_to_assemblies = args.assembly_data
     if arg.assembly_data:
+        os.chdir(path_to_assemblies)
+        namelist_cmd = 'python3 ../FM_Intern_Wrap/getNameList.py'
+        os.system(namelist_cmd)
         #if statement to determine spades or otherwise
         logging.info("Create new directory for exonerate hits")
         assembly_out_path = 'exonerate/'
