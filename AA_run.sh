@@ -28,9 +28,9 @@ python3 findBest.py
 ##run muscle (runmuscle.sh)
 ##pick phylogenetic tree program (iqtree, raxml)
 
-'''
-Extra Hybpiper scripts
-'''
+
+#Extra Hybpiper scripts
+
 
 
 #Test for paralogs
