@@ -3,6 +3,7 @@
 #Remove any previous runs
 parallel rm -r {} :::: namelist.txt
 
+path_to_target = $1
 
 #Run main HybPiper script with all available CPUs
 while read i
