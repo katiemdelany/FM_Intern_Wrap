@@ -9,18 +9,17 @@ import logging
 from os import path
 
 
-#Argument input for Hybpiper. User input for dna, AA or both.
-#KD- Check that it works for both (eventually)
+#Argument input for Wrapper: target enrichment data, assembly data, de novo data, AND target file path
 def check_arg(args=None):
     parser = argparse.ArgumentParser(description='Run Hybpiper for nucleotide or amino acid sequencing data')
     parser.add_argument('--target_enrichment_data', action = 'store_true',default =False,
             help = 'Input path of target enrichment data')
+    parser.add_argument('--whole_genome_data', action = 'store_true', default = True,
+            help - 'Input path of de novo whole genome sequence data.')
     parser.add_argument('--reference_target', action = 'store_true', default = False,
             help = 'Input path of reference target genome')
     parser.add_argument('--assembly_data', action='store_true', dest='assembly',default =False,
             help = 'Input path of assembly data')
-    parser.add_argument('--whole_genome_data', action = 'store_true', default = True,
-            help - 'Input path of whole genome sequence data.')
     
   #     parser.add_argument('--trim', action='store_true', default=False,
  #           help = 'Clean fastq data using trimmomatic')
@@ -30,7 +29,7 @@ args = check_arg(sys.argv[1:])
 
 
 def main():
-  
+    
     #Clones hybpiper into current directory
     clone_hybpiper = 'git clone https://github.com/mossmatters/HybPiper.git'
     os.system(clone_hybpiper)
@@ -45,7 +44,8 @@ def main():
         namelist_cmd = 'python3 ../FM_Intern_Wrap/getNameList.py'
         os.system(namelist_cmd)
         logging.info("Creating new directory for target enrichment hybpiper")
-        hyb_results = path_to_dataset + '/hybpiper_TE
+        os.system('../')
+        hyb_results = '/hybpiper_TE'
         os.mkdir(hyb_results)
         os.chdir(hyb_results)
         logging.info('Running amino acid target script')
