@@ -15,5 +15,8 @@ while read name;
 do ../HybPiper/reads_first.py -b target_file_path -r path_to_dataset/$name*.fastq --prefix $name --cpu 6
 done < ./namelist.txt
 
+#Retrieve sequences
+python3 ../HybPiper/retrieve_sequences.py target_file_path . aa
+
 #Visualizing Results
 python3 ../HybPiper/get_seq_lengths.py target_file_path namelist.txt aa > test_seq_lengths.txt
