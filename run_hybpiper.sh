@@ -12,7 +12,7 @@ cd hybpiper_blastx
 
 #runnning HybPiper main script on user input dataset
 while read name;
-do ../HybPiper/reads_first.py -b target_file_path -r path_to_dataset/$name*.fastq --prefix $name --cpu 6
+do ../HybPiper/reads_first.py -b target_file_path -r path_to_dataset/$name*.fastq --prefix $name 
 done < ./namelist.txt
 
 #Retrieve sequences
