@@ -1,9 +1,10 @@
 #!/bin/bash
 
-#this is from tophits, which should be in supercontig folder
-while read i 
-do 
-muscle -in $i -out new_$i
-done < tophits.txt
+#align fasta files from HybPiper/retrieve_seqs.py
+for $f in *.FAA;
+do muscle -in $f -out $f.aligned.fas
+done 
+
+
 
 
