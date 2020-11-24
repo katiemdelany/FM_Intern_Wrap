@@ -52,6 +52,7 @@ def main():
         #run blastx version of hybpiper
         runAAcmd = './run_hybpiper.sh ' + path_to_target
         os.system(runAAcmd)
+        runMuscle = 'sh ../runmuscle.sh'
         
     #if argument is whole genome input data
     #run through hybpiper
