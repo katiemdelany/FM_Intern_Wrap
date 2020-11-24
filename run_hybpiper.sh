@@ -10,7 +10,8 @@ git clone https://github.com/mossmatters/HybPiper.git
 mkdir -p hybpiper_blastx
 cd hybpiper_blastx
 
-#runnning HybPiper main script on user input dataset
+#running HybPiper main script on user input dataset
+#must have name list with no space at end
 while read name;
 do ../HybPiper/reads_first.py -b target_file_path -r path_to_dataset/$name*.fastq --prefix $name 
 done < ./namelist.txt
