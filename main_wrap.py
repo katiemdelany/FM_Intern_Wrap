@@ -16,8 +16,6 @@ def check_arg(args=None):
             help = 'Input path of target enrichment data')
     parser.add_argument('--whole_genome_data', action = 'store_true', default = True,
             help - 'Input path of de novo whole genome sequence data.')
-    parser.add_argument('--reference_target', action = 'store_true', default = False,
-            help = 'Input path of reference target genome')
     parser.add_argument('--assembly_data', action='store_true', dest='assembly',default =False,
             help = 'Input path of assembly data')
     
