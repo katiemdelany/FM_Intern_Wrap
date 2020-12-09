@@ -32,9 +32,12 @@ def main():
     clone_hybpiper = 'git clone https://github.com/mossmatters/HybPiper.git'
     os.system(clone_hybpiper)
 
+    #Change the target file here
+    path_to_target_dna = '~/FM_Intern_Wrap/Pseude_target_CDS.fasta'
+    path_to_target_aa = '~/FM_Intern_Wrap/Pseude_target_CDS_translation.fasta'
+    
     #if user input is target enrichment data
     #run through hybpiper
-    path_to_target = args.reference_target 
     path_to_sequences = args.target_enrichment_data
     if args.target_enrichment_data:
         os.chdir(path_to_sequences)
@@ -48,7 +51,7 @@ def main():
         os.chdir(hyb_results)
         logging.info('Running amino acid target script')
         #run blastx version of hybpiper
-        runAAcmd = './run_hybpiper.sh ' + path_to_target
+        runAAcmd = './run_hybpiper.sh ' + path_to_target_aa
         os.system(runAAcmd)
         runMuscle = 'sh ../runmuscle.sh'
         
@@ -66,7 +69,7 @@ def main():
         os.mkdir(de_novo)
         os.chdir(de_novo)
         logging.info('Running amino acid target script')
-        runAAcmd = './run_hybpiper.sh ' + path_to_target
+        runAAcmd = './run_hybpiper.sh ' + path_to_target_aa
         os.system(runAAcmd)
         
      #if user input is assembly
@@ -83,7 +86,7 @@ def main():
         os.system(mkdir {}.format(assembly_out_path))
         os.system(cd {}.format(assembly_out_path))
         logging.info("Running exonerate on assembly input data')
-        os.system('./assembly_exonerate.sh '+path_to_assemblies + ' ' +path_to_target)
+        os.system('./assembly_exonerate.sh '+path_to_assemblies + ' ' +path_to_target_aa)
         
                      
 if __name__=='__main__':
