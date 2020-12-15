@@ -67,7 +67,7 @@ def main():
         #os.system('../')
         logging.info('Running amino acid target script')
         #run blastx version of hybpiper
-        runAAcmd = '~FM_Intern_Wrap/run_hybpiper.sh ' + path_to_target_aa
+        runAAcmd = '~FM_Intern_Wrap/run_hybpiper.sh ' + path_to_target_aa +' '+ path_to_sequences
         os.system(runAAcmd)
         logging.info("Running amino acid initial hybpiper scripts")
         #runMuscle = 'sh ../runmuscle.sh'
