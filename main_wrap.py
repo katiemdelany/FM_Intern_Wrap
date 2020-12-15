@@ -18,8 +18,8 @@ def check_arg(args=None):
     #        help - 'Input path of de novo whole genome sequence data.')
     #parser.add_argument('--assembly_data', action='store_true', dest='assembly',default =False,
     #        help = 'Input path of assembly data')
-    #parser.add_argument('-target_enrichment_data', '--TE',
-    #                    help='path to target enriched data',
+    parser.add_argument('-target_enrichment_data', '--TE',
+                        help='path to target enriched data',
                         required='True'
                         )
     parser.add_argument('-whole_genome_data', '--de_novo',
