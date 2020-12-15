@@ -37,13 +37,17 @@ def main():
     
     #Change the target file here
     path_to_target_dna = '~/FM_Intern_Wrap/Pseude_target_CDS.fasta'
+    logging.info('Path to target DNA: {}.format(path_to_target_dna)')
     path_to_target_aa = '~/FM_Intern_Wrap/Pseude_target_CDS_translation.fasta'
+    logging.info('Path to target Amino Acid: {}.format(path_to_target_aa)')
+    
     
     #if user input is target enrichment data
     #run through hybpiper
     path_to_sequences = args.target_enrichment_data
     if args.target_enrichment_data:
         hyb_results = '{}hybpiper_TE.format(path_to_sequences)'
+        logging.info('Created hybpiper directory in test sequence directory')
         os.mkdir(hyb_results)
         os.chdir(path_to_sequences)
         #Get namelist.txt from dataset directory
