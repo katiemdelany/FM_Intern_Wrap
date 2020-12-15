@@ -31,7 +31,8 @@ def main():
     #Clones hybpiper into current directory
     clone_hybpiper = 'git clone https://github.com/mossmatters/HybPiper.git'
     os.system(clone_hybpiper)
-
+    logging.info("Hybpiper cloned")
+    
     #Change the target file here
     path_to_target_dna = '~/FM_Intern_Wrap/Pseude_target_CDS.fasta'
     path_to_target_aa = '~/FM_Intern_Wrap/Pseude_target_CDS_translation.fasta'
