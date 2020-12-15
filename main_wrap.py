@@ -95,7 +95,7 @@ def main():
      #if user input is assembly
     #check if spades, run exonerate
     #if non-spades assembly, run Claudio's version of exonerate
-    if args.assembly_data:
+    if args.assemblies:
         path_to_assemblies = args.assemblies
         logging.info('Path to assemblies '+path_to_assemblies)
         logging.info('Created hybpiper directory in assembly sequence directory')
