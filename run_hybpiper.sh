@@ -17,7 +17,7 @@ path_to_dataset=$2
 #must have name list with no space at end
 while read name;
 do ~/FM_Intern_Wrap/HybPiper/reads_first.py -b ${target_file_path} -r ${path_to_dataset}/$name*.fastq --prefix $name 
-done < ./namelist.txt
+done < {path_to_dataset}namelist.txt
 
 #Retrieve sequences
 python3 ~/FM_Intern_Wrap/HybPiper/retrieve_sequences.py ${target_file_path} . aa
