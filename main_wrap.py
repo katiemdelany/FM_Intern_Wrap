@@ -90,6 +90,7 @@ def main():
         logging.info('Running amino acid target script')
         runAAcmd = './run_hybpiper.sh ' + path_to_target_aa
         os.system(runAAcmd)
+        logging.info('Finished amino acid target script')
         
      #if user input is assembly
     #check if spades, run exonerate
