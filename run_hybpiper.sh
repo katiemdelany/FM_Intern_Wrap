@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ################################
 #run HyPiper with blastx option#
 #if target enrichment or de novo selected#
