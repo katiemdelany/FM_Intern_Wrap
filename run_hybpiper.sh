@@ -7,7 +7,6 @@
 target_file_path = $1
 path_to_dataset = $2
 
-git clone https://github.com/mossmatters/HybPiper.git
 
 ###
 #mkdir -p hybpiper_blastx
