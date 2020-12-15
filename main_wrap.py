@@ -8,16 +8,12 @@ import subprocess
 import logging
 from os import path
 
-
-#Argument input for Wrapper: target enrichment data, assembly data, de novo data, AND target file path
 def check_arg(args=None):
+    ''' 
+    Argument input for Wrapper: target enrichment data, assembly data, de novo data, AND target file path
+    
+    '''
     parser = argparse.ArgumentParser(description='Run Hybpiper for nucleotide or amino acid sequencing data')
-    #parser.add_argument('--target_enrichment_data', action = 'store_true',default =False,
-     #       help = 'Input path of target enrichment data')
-   # parser.add_argument('--whole_genome_data', action = 'store_true', default = True,
-    #        help - 'Input path of de novo whole genome sequence data.')
-    #parser.add_argument('--assembly_data', action='store_true', dest='assembly',default =False,
-    #        help = 'Input path of assembly data')
     parser.add_argument('-target_enrichment_data',
                         help='path to target enriched data',
                         )
@@ -27,8 +23,6 @@ def check_arg(args=None):
     parser.add_argument('-assemblies',
                         help='Input path of assembled data',
                         )    
-  #     parser.add_argument('--trim', action='store_true', default=False,
- #           help = 'Clean fastq data using trimmomatic')
 
     return parser.parse_args(args)
 args = check_arg(sys.argv[1:])
@@ -49,7 +43,10 @@ def main():
     #run through hybpiper
     path_to_sequences = args.target_enrichment_data
     if args.target_enrichment_data:
+        os.mkdir('test/')
         os.chdir(path_to_sequences)
+        os.system('cp {} ~/FM_Intern_Wrap/test/')
+        os.chdir("~FM_Intern_Wrap")
         #Get namelist.txt from dataset directory
         namelist_cmd = 'python3 ~/FM_Intern_Wrap/getNameList.py'
         os.system(namelist_cmd)
