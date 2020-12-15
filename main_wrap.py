@@ -76,8 +76,8 @@ def main():
     #run through hybpiper
     #spades assembly
     #exonerate normal
-    path_to_denovo = args.whole_genome_data 
     if args.whole_genome_data:
+        path_to_denovo = args.whole_genome_data 
         logging.info('Path to whole genome '+path_to_denovo)
         logging.info('Created hybpiper directory in whole genome sequence directory')
         os.chdir(path_to_denovo)
@@ -94,8 +94,8 @@ def main():
      #if user input is assembly
     #check if spades, run exonerate
     #if non-spades assembly, run Claudio's version of exonerate
-    path_to_assemblies = args.assembly_data
     if args.assembly_data:
+        path_to_assemblies = args.assemblies
         logging.info('Path to assemblies '+path_to_assemblies)
         logging.info('Created hybpiper directory in assembly sequence directory')
         os.chdir(path_to_assemblies)
