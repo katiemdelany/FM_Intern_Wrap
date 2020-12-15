@@ -14,15 +14,20 @@ def check_arg(args=None):
     parser = argparse.ArgumentParser(description='Run Hybpiper for nucleotide or amino acid sequencing data')
     #parser.add_argument('--target_enrichment_data', action = 'store_true',default =False,
      #       help = 'Input path of target enrichment data')
-    parser.add_argument('--whole_genome_data', action = 'store_true', default = True,
-            help - 'Input path of de novo whole genome sequence data.')
-    parser.add_argument('--assembly_data', action='store_true', dest='assembly',default =False,
-            help = 'Input path of assembly data')
-    parser.add_argument('-target_enrichment_data', '--TE',
-                        help='path to target enriched data',
+   # parser.add_argument('--whole_genome_data', action = 'store_true', default = True,
+    #        help - 'Input path of de novo whole genome sequence data.')
+    #parser.add_argument('--assembly_data', action='store_true', dest='assembly',default =False,
+    #        help = 'Input path of assembly data')
+    #parser.add_argument('-target_enrichment_data', '--TE',
+    #                    help='path to target enriched data',
                         required='True'
                         )
-    
+    parser.add_argument('-whole_genome_data', '--de_novo',
+                        help='Input path of de novo whole genome sequence data.'
+                        )
+    parser.add_argument('-assemblies', '--A',
+                        help='Input path of assembled data',
+                        )    
   #     parser.add_argument('--trim', action='store_true', default=False,
  #           help = 'Clean fastq data using trimmomatic')
 
