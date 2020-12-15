@@ -43,10 +43,8 @@ def main():
     #run through hybpiper
     path_to_sequences = args.target_enrichment_data
     if args.target_enrichment_data:
-        os.mkdir('test/')
+        os.mkdir('{}hybpiper_TE.format(path_to_sequences)')
         os.chdir(path_to_sequences)
-        os.system('cp {} ~/FM_Intern_Wrap/test/')
-        os.chdir("~FM_Intern_Wrap")
         #Get namelist.txt from dataset directory
         namelist_cmd = 'python3 ~/FM_Intern_Wrap/getNameList.py'
         os.system(namelist_cmd)
@@ -57,7 +55,7 @@ def main():
         os.chdir(hyb_results)
         logging.info('Running amino acid target script')
         #run blastx version of hybpiper
-        #runAAcmd = './run_hybpiper.sh ' + path_to_target_aa
+        #runAAcmd = '~FM_Intern_Wrap/run_hybpiper.sh ' + path_to_target_aa
         #os.system(runAAcmd)
         #runMuscle = 'sh ../runmuscle.sh'
         
