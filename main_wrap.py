@@ -53,6 +53,8 @@ def main():
         #Get namelist.txt from dataset directory
         namelist_cmd = 'python3 ~/FM_Intern_Wrap/getNameList.py'
         os.system(namelist_cmd)
+        namelist = 'namelist.txt'
+        path_to_namelist = os.path.join(path_to_sequences,namelist)
         
         #Make output directory
         out_dir = "hybpiper_TE"
@@ -68,7 +70,7 @@ def main():
         logging.info('Running amino acid target script')
         #run blastx version of hybpiper
         AAscript = '~FM_Intern_Wrap/run_hybpiper.sh'
-        runAAcmd = 'sh ~/FM_Intern_Wrap/run_hybpiper.sh ' + path_to_target_aa +' '+ path_to_sequences
+        runAAcmd = 'sh ~/FM_Intern_Wrap/run_hybpiper.sh ' + path_to_target_aa +' '+ path_to_sequences +' '+ path_to_namelist
         os.system(runAAcmd)
         logging.info("Running amino acid initial hybpiper scripts")
         #runMuscle = 'sh ../runmuscle.sh'
