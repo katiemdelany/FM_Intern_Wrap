@@ -46,6 +46,7 @@ def main():
     #run through hybpiper
     path_to_sequences = args.target_enrichment_data
     if args.target_enrichment_data:
+        logging.info('Path to TE data: '+path_to_sequences)
         logging.info('Created hybpiper directory in test sequence directory')
         os.chdir(path_to_sequences)
         
@@ -75,7 +76,9 @@ def main():
     #spades assembly
     #exonerate normal
     path_to_denovo = args.whole_genome_data 
-    if arg.whole_genome_data:
+    if args.whole_genome_data:
+        logging.info('Path to whole genome '+path_to_denovo)
+        logging.info('Created hybpiper directory in whole genome sequence directory')
         os.chdir(path_to_denovo)
         namelist_cmd = 'python3 ../FM_Intern_Wrap/getNameList.py'
         os.system(namelist_cmd)
@@ -91,7 +94,9 @@ def main():
     #check if spades, run exonerate
     #if non-spades assembly, run Claudio's version of exonerate
     path_to_assemblies = args.assembly_data
-    if arg.assembly_data:
+    if args.assembly_data:
+        logging.info('Path to assemblies '+path_to_assemblies)
+        logging.info('Created hybpiper directory in assembly sequence directory')
         os.chdir(path_to_assemblies)
         namelist_cmd = 'python3 ../FM_Intern_Wrap/getNameList.py'
         os.system(namelist_cmd)
