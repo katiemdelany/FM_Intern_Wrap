@@ -36,9 +36,9 @@ def main():
     logging.info("Hybpiper cloned")
     
     #Change the target file here
-    path_to_target_dna = '~/FM_Intern_Wrap/Pseude_target_CDS.fasta'
+    path_to_target_dna = os.path.expanduser('~/FM_Intern_Wrap/Pseude_target_CDS.fasta')
     logging.info('Path to target DNA: '+path_to_target_dna)
-    path_to_target_aa = '~/FM_Intern_Wrap/Pseude_target_CDS_translation.fasta'
+    path_to_target_aa = os.path.expanduser('~/FM_Intern_Wrap/Pseude_target_CDS_translation.fasta')
     logging.info('Path to target Amino Acid: '+path_to_target_aa)
     
     
@@ -67,8 +67,8 @@ def main():
         #os.system('../')
         logging.info('Running amino acid target script')
         #run blastx version of hybpiper
-        AAscript = '~FM_Intern_Wrap/run_hybpiper.sh'
-        runAAcmd = 'sh ~/FM_Intern_Wrap/run_hybpiper.sh ' + path_to_target_aa +' '+ path_to_sequences
+        AAscript = os.path.expanduser('~FM_Intern_Wrap/run_hybpiper.sh')
+        runAAcmd = 'sh '+ AAscript+' ' + path_to_target_aa +' '+ path_to_sequences
         os.system(runAAcmd)
         logging.info("Running amino acid initial hybpiper scripts")
         #runMuscle = 'sh ../runmuscle.sh'
