@@ -84,10 +84,10 @@ def main():
         #if statement to determine spades or otherwise
         logging.info("Create new directory for exonerate hits")
         assembly_out_path = 'exonerate/'
-        os.system(mkdir {}.format(assembly_out_path))
-        os.system(cd {}.format(assembly_out_path))
+        os.system('mkdir {}.format(assembly_out_path)')
+        os.system('cd {}.format(assembly_out_path)')
         logging.info("Running exonerate on assembly input data')
-        os.system('./assembly_exonerate.sh '+path_to_assemblies + ' ' +path_to_target_aa)
+        os.system("./assembly_exonerate.sh {} {}.format(path_to_assemblies, path_to_target_aa)")
         
                      
 if __name__=='__main__':
