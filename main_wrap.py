@@ -46,18 +46,19 @@ def main():
     #run through hybpiper
     path_to_sequences = args.target_enrichment_data
     if args.target_enrichment_data:
-        hyb_results = '{}hybpiper_TE.format(path_to_sequences)'
         logging.info('Created hybpiper directory in test sequence directory')
-        os.mkdir(hyb_results)
         os.chdir(path_to_sequences)
+        
         #Get namelist.txt from dataset directory
         namelist_cmd = 'python3 ~/FM_Intern_Wrap/getNameList.py'
         os.system(namelist_cmd)
+        
+        hyb_results = '/hybpiper_TE'
+        mk_results = 'mkdir /hybpiper_TE'
+        os.system(mk_results)
+        os.chdir(hyb_results)
         logging.info("Creating new directory for target enrichment hybpiper")
         #os.system('../')
-        #hyb_results = '/hybpiper_TE'
-        #os.mkdir(hyb_results)
-        os.chdir(hyb_results)
         logging.info('Running amino acid target script')
         #run blastx version of hybpiper
         #runAAcmd = '~FM_Intern_Wrap/run_hybpiper.sh ' + path_to_target_aa
