@@ -40,7 +40,7 @@ def main():
     #run through hybpiper
     path_to_sequences = args.target_enrichment_data
     if args.target_enrichment_data:
-        os.chdir(path_to_sequences
+        os.chdir(path_to_sequences)
         #Get namelist.txt from dataset directory
         namelist_cmd = 'python3 ~/FM_Intern_Wrap/getNameList.py'
         os.system(namelist_cmd)
