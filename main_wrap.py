@@ -37,9 +37,9 @@ def main():
     
     #Change the target file here
     path_to_target_dna = '~/FM_Intern_Wrap/Pseude_target_CDS.fasta'
-    logging.info('Path to target DNA: {}.format(path_to_target_dna)')
+    logging.info('Path to target DNA: '+path_to_target_dna)
     path_to_target_aa = '~/FM_Intern_Wrap/Pseude_target_CDS_translation.fasta'
-    logging.info('Path to target Amino Acid: {}.format(path_to_target_aa)')
+    logging.info('Path to target Amino Acid: '+path_to_target_aa)
     
     
     #if user input is target enrichment data
@@ -53,10 +53,15 @@ def main():
         namelist_cmd = 'python3 ~/FM_Intern_Wrap/getNameList.py'
         os.system(namelist_cmd)
         
-        hyb_results = '/hybpiper_TE'
-        mk_results = 'mkdir /hybpiper_TE'
-        os.system(mk_results)
-        os.chdir(hyb_results)
+        #Make output directory
+        out_dir = "hybpiper_TE"
+        out_path = os.path.join(path_to_sequences,out_dir)
+        os.mkdir(out_path)
+        
+        #hyb_results = '/hybpiper_TE'
+        #mk_results = 'mkdir /hybpiper_TE'
+        #os.system(mk_results)
+        os.chdir(out_path)
         logging.info("Creating new directory for target enrichment hybpiper")
         #os.system('../')
         logging.info('Running amino acid target script')
