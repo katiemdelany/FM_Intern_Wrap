@@ -4,8 +4,8 @@
 #run HyPiper with blastx option#
 #if target enrichment or de novo selected#
 ################################
-target_file_path = $1
-path_to_dataset = $2
+target_file_path=$1
+path_to_dataset=$2
 
 
 ###
