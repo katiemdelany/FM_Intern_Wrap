@@ -88,7 +88,7 @@ def main():
         os.mkdir(de_novo)
         os.chdir(de_novo)
         logging.info('Running amino acid target script')
-        runAAcmd = './run_hybpiper.sh ' + path_to_target_aa
+        runAAcmd = 'bash run_hybpiper.sh ' + path_to_target_aa
         os.system(runAAcmd)
         logging.info('Finished amino acid target script')
         
