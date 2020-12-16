@@ -115,12 +115,16 @@ def main():
         namelist_cmd = 'python3 ../FM_Intern_Wrap/getNameList.py'
         os.system(namelist_cmd)
         #if statement to determine spades or otherwise
+        
+        #Make output directory
+        out_dir = "exonerate"
+        out_path = os.path.join(path_to_assemblies,out_dir)
+        os.mkdir(out_path)
         logging.info("Create new directory for exonerate hits")
-        assembly_out_path = 'exonerate/'
-        os.system('mkdir {}.format(assembly_out_path)')
-        os.system('cd {}.format(assembly_out_path)')
+        
+        os.chdir(out_path)
         logging.info("Running exonerate on assembly input data")
-        os.system("./assembly_exonerate.sh {} {}.format(path_to_assemblies, path_to_target_aa)")
+        os.system('sh assembly_exonerate.sh '+path_to_assemblies+' 'path_to_target_aa)
         
                      
 if __name__=='__main__':
