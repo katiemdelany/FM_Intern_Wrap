@@ -1,5 +1,8 @@
-## Wrapper for running Hybpiper Analysis
+'''
+Main wrapper for running Hybpiper and subsequent analysis.
+Input: Path to target enriched data, whole genome sequencing data, assembly data
 
+'''
 import os
 import sys
 import argparse
