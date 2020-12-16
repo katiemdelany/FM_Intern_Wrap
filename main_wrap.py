@@ -61,9 +61,6 @@ def main():
         out_path = os.path.join(path_to_sequences,out_dir)
         os.mkdir(out_path)
         
-        #hyb_results = '/hybpiper_TE'
-        #mk_results = 'mkdir /hybpiper_TE'
-        #os.system(mk_results)
         os.chdir(out_path)
         logging.info("Creating new directory for target enrichment hybpiper")
         #os.system('../')
@@ -80,20 +77,32 @@ def main():
     #spades assembly
     #exonerate normal
     if args.whole_genome_data:
-        path_to_denovo = args.whole_genome_data 
-        logging.info('Path to whole genome '+path_to_denovo)
-        logging.info('Created hybpiper directory in whole genome sequence directory')
-        os.chdir(path_to_denovo)
-        namelist_cmd = 'python3 ../FM_Intern_Wrap/getNameList.py'
+        path_to_sequences = args.whole_genome_data
+        logging.info('Path to de novo data: '+path_to_sequences)
+        logging.info('Created hybpiper directory in test sequence directory')
+        os.chdir(path_to_sequences)
+        
+        #Get namelist.txt from dataset directory
+        namelist_cmd = 'python3 ~/FM_Intern_Wrap/getNameList.py'
         os.system(namelist_cmd)
-        logging.info("Creating new directory for whole genome data run")
-        de_novo = path_to_denovo+ '/de_novo'
-        os.mkdir(de_novo)
-        os.chdir(de_novo)
+        namelist = 'namelist.txt'
+        path_to_namelist = os.path.join(path_to_sequences,namelist)
+        
+        #Make output directory
+        out_dir = "hybpiper_denovo"
+        out_path = os.path.join(path_to_sequences,out_dir)
+        os.mkdir(out_path)
+        
+        os.chdir(out_path)
+        logging.info("Creating new directory for whole genome sequence input hybpiper")
+        #os.system('../')
         logging.info('Running amino acid target script')
-        runAAcmd = 'bash run_hybpiper.sh ' + path_to_target_aa
+        #run blastx version of hybpiper
+        AAscript = '~FM_Intern_Wrap/run_hybpiper.sh'
+        runAAcmd = 'sh ~/FM_Intern_Wrap/run_hybpiper.sh ' + path_to_target_aa +' '+ path_to_sequences +' '+ path_to_namelist
         os.system(runAAcmd)
-        logging.info('Finished amino acid target script')
+        logging.info("Running amino acid initial hybpiper scripts")
+        #runMuscle = 'sh ../runmuscle.sh'
         
      #if user input is assembly
     #check if spades, run exonerate
