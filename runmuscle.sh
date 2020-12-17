@@ -14,6 +14,6 @@ echo $f has $i taxa
 #cp $f select_genes/
 #echo copied $f with $i sequences
 #fi
-#done
+done
 
 
