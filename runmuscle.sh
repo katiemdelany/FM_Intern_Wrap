@@ -5,7 +5,7 @@ for $f in *.FAA;
 do muscle -in $f -out $f.aligned.fas
 done 
 
-mkdir select_genes/
+#mkdir select_genes/
 
 for f in *.FAA.aligned.fas; do
 i = `cat $f | grep ">" | wc -l`
