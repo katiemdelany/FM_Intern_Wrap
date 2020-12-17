@@ -75,6 +75,7 @@ def main():
         logging.info("Running amino acid initial hybpiper scripts")
         logging.info("Running MSA with muscle")
         runMuscle = 'sh ~/FM_Intern_Wrap/runmuscle.sh'
+        logging.info("MSA complete")
         
     #if argument is whole genome input data
     #run through hybpiper
