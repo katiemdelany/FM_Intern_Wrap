@@ -74,7 +74,7 @@ def main():
         os.system(runAAcmd)
         logging.info("Running amino acid initial hybpiper scripts")
         logging.info("Running MSA with muscle")
-        runMuscle = 'sh ../runmuscle.sh'
+        runMuscle = 'sh ~/FM_Intern_Wrap/runmuscle.sh'
         
     #if argument is whole genome input data
     #run through hybpiper
