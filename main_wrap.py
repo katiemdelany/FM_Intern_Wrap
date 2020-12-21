@@ -118,6 +118,7 @@ def main():
         logging.info('Path to assemblies '+path_to_assemblies)
         logging.info('Created hybpiper directory in assembly sequence directory')
         os.chdir(path_to_assemblies)
+        #namelist py program won't work here (COME BACK TO THIS - might not need)
         namelist_cmd = 'python3 ../FM_Intern_Wrap/getNameList.py'
         os.system(namelist_cmd)
         #if statement to determine spades or otherwise
@@ -128,10 +129,17 @@ def main():
         os.mkdir(out_path)
         logging.info("Create new directory for exonerate hits")
         
-        os.chdir(out_path)
-        logging.info("Running exonerate on assembly input data")
-        os.system('sh assembly_exonerate.sh '+path_to_assemblies+' '+path_to_target_aa)
-        
+        keyword = 'spades'
+        for fname in os.listdir(path_to_assemblies):
+            if keyword in fname:
+                #if spades assembly, run exonerate_hits from HybPiper
+                os.chdir(out_path)
+                logging.info("Running HybPiper exonerate on assembly input data")
+                os.system('sh spades_exonerate.sh '+path_to_assemblies+' '+path_to_target_aa)
+            elif keyword not in fname:
+                os.chdir(out_path)
+                logging.info("Running alternate exonerate script on assembly input data.")
+                #Create alternate assembly script to run version of exonerate
                      
 if __name__=='__main__':
     logger = logging.getLogger(__name__)
