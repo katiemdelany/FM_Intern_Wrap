@@ -1,4 +1,4 @@
-## Need branch of pipeline for spades assembly input
+#!/bin/bash
 
 spades_path = $1
 target_path = $2
