@@ -77,6 +77,10 @@ def main():
         logging.info("Running MSA with muscle")
         runMuscle = 'sh ~/FM_Intern_Wrap/runmuscle.sh'
         logging.info("MSA complete")
+        logging.into("Converting aligned Fasta to Phylip")
+        convert_cmd = 'sh runConverter.sh'
+        os.system(convert_cmd) 
+        logging.info("Converted fasta files to phylip")
         
     #if argument is whole genome input data
     #run through hybpiper
