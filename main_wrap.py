@@ -112,7 +112,14 @@ def main():
         runAAcmd = 'sh ~/FM_Intern_Wrap/run_hybpiper.sh ' + path_to_target_aa +' '+ path_to_sequences +' '+ path_to_namelist
         os.system(runAAcmd)
         logging.info("Running amino acid initial hybpiper scripts")
-        #runMuscle = 'sh ../runmuscle.sh'
+        os.chdir(out_path)
+        logging.info("Running MSA with muscle")
+        runMuscle = 'sh ~/FM_Intern_Wrap/runmuscle.sh'
+        logging.info("MSA complete")
+        logging.into("Converting aligned Fasta to Phylip")
+        convert_cmd = 'sh runConverter.sh'
+        os.system(convert_cmd) 
+        logging.info("Converted fasta files to phylip")
         
      #if user input is assembly
     #check if spades, run exonerate
