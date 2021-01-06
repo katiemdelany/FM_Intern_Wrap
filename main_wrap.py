@@ -76,6 +76,7 @@ def main():
         os.chdir(out_path)
         logging.info("Running MSA with muscle")
         runMuscle = 'sh ~/FM_Intern_Wrap/runmuscle.sh'
+        os.system(runMuscle)
         logging.info("MSA complete")
         logging.info("Converting aligned Fasta to Phylip")
         convert_cmd = 'sh ~/FM_Intern_Wrap/runConverter.sh'
@@ -115,6 +116,7 @@ def main():
         os.chdir(out_path)
         logging.info("Running MSA with muscle")
         runMuscle = 'sh ~/FM_Intern_Wrap/runmuscle.sh'
+        os.system(runMuscle)
         logging.info("MSA complete")
         logging.info("Converting aligned Fasta to Phylip")
         convert_cmd = 'sh ~/FM_Intern_Wrap/runConverter.sh'
