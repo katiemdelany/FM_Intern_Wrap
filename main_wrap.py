@@ -78,7 +78,7 @@ def main():
         runMuscle = 'sh ~/FM_Intern_Wrap/runmuscle.sh'
         logging.info("MSA complete")
         logging.info("Converting aligned Fasta to Phylip")
-        convert_cmd = 'sh runConverter.sh'
+        convert_cmd = 'sh ~/FM_Intern_Wrap/runConverter.sh'
         os.system(convert_cmd) 
         logging.info("Converted fasta files to phylip")
         
@@ -117,7 +117,7 @@ def main():
         runMuscle = 'sh ~/FM_Intern_Wrap/runmuscle.sh'
         logging.info("MSA complete")
         logging.info("Converting aligned Fasta to Phylip")
-        convert_cmd = 'sh runConverter.sh'
+        convert_cmd = 'sh ~/FM_Intern_Wrap/runConverter.sh'
         os.system(convert_cmd) 
         logging.info("Converted fasta files to phylip")
         
