@@ -132,8 +132,8 @@ def main():
         logging.info('Created hybpiper directory in assembly sequence directory')
         os.chdir(path_to_assemblies)
         #namelist py program won't work here (COME BACK TO THIS - might not need)
-        namelist_cmd = 'python3 ../FM_Intern_Wrap/getNameList.py'
-        os.system(namelist_cmd)
+        #namelist_cmd = 'python3 ../FM_Intern_Wrap/getNameList.py'
+        #os.system(namelist_cmd)
         #if statement to determine spades or otherwise
         
         #Make output directory
