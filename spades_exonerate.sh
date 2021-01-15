@@ -5,8 +5,8 @@
 ######################
 
 
-spades_path = $1
-target_path = $2
+spades_path=$1
+target_path=$2
 
 for i in ${spades_path}; do 
 	name=${i##*/}
