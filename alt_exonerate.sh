@@ -6,7 +6,7 @@ target_path = $2
 mkdir -p exonerate
 cd exonerate
 
-for i in $assembly_path; do 
+for i in ${assembly_path}; do 
 	name=${i##*/}
 	~/FM_Intern_Wrap/exonerate_alternate.py target_path $i/contigs.fasta --prefix $name
 done
