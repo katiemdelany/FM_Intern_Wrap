@@ -8,7 +8,7 @@
 spades_path = $1
 target_path = $2
 
-for i in $spades_path; do 
+for i in ${spades_path}; do 
 	name=${i##*/}
 	~/git/HybPiper/exonerate_hits.py ${target_path} $i/contigs.fasta --prefix $name
 done
