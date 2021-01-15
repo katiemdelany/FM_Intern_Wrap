@@ -14,7 +14,7 @@ for i in ${spades_path}; do
 done
 
 #make a genelist
-grep ">" {target_path} | sed s/^.*\-// > genelist.txt
+grep ">" ${target_path} | sed s/^.*\-// > genelist.txt
 
 genelist=`cat genelist.txt`
 for i in ${spades_path}; do
