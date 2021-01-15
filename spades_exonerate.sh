@@ -1,18 +1,23 @@
 #!/bin/bash
 
+######################
+#Run exonerate hits with spades assemblies
+######################
+
+
 spades_path = $1
 target_path = $2
 
 for i in $spades_path; do 
 	name=${i##*/}
-	~/git/HybPiper/exonerate_hits.py target_path $i/contigs.fasta --prefix $name
+	~/git/HybPiper/exonerate_hits.py ${target_path} $i/contigs.fasta --prefix $name
 done
 
 #make a genelist
-grep ">" target_path | sed s/^.*\-// > genelist.txt
+grep ">" {target_path} | sed s/^.*\-// > genelist.txt
 
 genelist=`cat genelist.txt`
-for i in $spades_path; do
+for i in ${spades_path}; do
         name=${i##*/}
         echo Working on $name
                 for gene in $genelist; do
