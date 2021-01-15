@@ -8,14 +8,14 @@ cd exonerate
 
 for i in ${assembly_path}; do 
 	name=${i##*/}
-	~/FM_Intern_Wrap/exonerate_alternate.py target_path $i/contigs.fasta --prefix $name
+	~/FM_Intern_Wrap/exonerate_alternate.py {target_path} $i/contigs.fasta --prefix $name
 done
 
 #make a genelist
-grep ">" target_path | sed s/^.*\-// > genelist.txt
+grep ">" {target_path} | sed s/^.*\-// > genelist.txt
 
 genelist=`cat genelist.txt`
-for i in $assembly_path; do
+for i in ${assembly_path}; do
         name=${i##*/}
         echo Working on $name
                 for gene in $genelist; do
