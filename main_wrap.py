@@ -147,8 +147,8 @@ def main():
             if keyword in fname:
                 #if spades assembly, run exonerate_hits from HybPiper
                 os.chdir(out_path)
-                logging.info("Running HybPiper exonerate on assembly input data")
-                os.system('sh ~/FM_Intern_Wrap/spades_exonerate.sh '+path_to_assemblies+' '+path_to_target_aa)
+                logging.info("Running HybPiper exonerate on assembly input data for "+fname)
+                os.system('sh ~/FM_Intern_Wrap/spades_exonerate.sh {} {}'.format(path_to_assemblies,path_to_target_aa))
             elif keyword not in fname:
                 os.chdir(out_path)
                 logging.info("Running alternate exonerate script on assembly input data.")
