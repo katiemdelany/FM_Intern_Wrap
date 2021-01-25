@@ -39,6 +39,7 @@ def main():
     logging.info("Hybpiper cloned")
     
     #Change the target file here
+    #To switch out file, change file name and upload new targets to github repo 
     path_to_target_dna = os.path.expanduser('~/FM_Intern_Wrap/Pseude_target_CDS.fasta')
     logging.info('Path to target DNA: '+path_to_target_dna)
     path_to_target_aa = os.path.expanduser('~/FM_Intern_Wrap/Pseude_target_CDS_translation.fasta')
@@ -46,7 +47,7 @@ def main():
     
     
     #if user input is target enrichment data
-    #run through hybpiper
+    #set input dataset directory as variable
     path_to_sequences = args.target_enrichment_data
     if args.target_enrichment_data:
         logging.info('Path to TE data: '+path_to_sequences)
@@ -54,6 +55,7 @@ def main():
         os.chdir(path_to_sequences)
         
         #Get namelist.txt from dataset directory
+        #This could potentially cause error later (see notes)
         namelist_cmd = 'python3 ~/FM_Intern_Wrap/getNameList.py'
         os.system(namelist_cmd)
         namelist = 'namelist.txt'
@@ -64,9 +66,9 @@ def main():
         out_path = os.path.join(path_to_sequences,out_dir)
         os.mkdir(out_path)
         
+        #change directory to output directory
         os.chdir(out_path)
         logging.info("Creating new directory for target enrichment hybpiper")
-        #os.system('../')
         logging.info('Running amino acid target script')
         #run blastx version of hybpiper
         AAscript = '~FM_Intern_Wrap/run_hybpiper.sh'
@@ -74,19 +76,19 @@ def main():
         os.system(runAAcmd)
         logging.info("Running amino acid initial hybpiper scripts")
         os.chdir(out_path)
-        logging.info("Running MSA with muscle")
+        #This will run mafft alignment
+        logging.info("Running MSA with mafft")
         runMuscle = 'sh ~/FM_Intern_Wrap/runmuscle.sh'
         os.system(runMuscle)
         logging.info("MSA complete")
+        #converts aligned fasta files to phylip (may not need this)
         logging.info("Converting aligned Fasta to Phylip")
         convert_cmd = 'sh ~/FM_Intern_Wrap/runConverter.sh'
         os.system(convert_cmd) 
         logging.info("Converted fasta files to phylip")
+        #Add phylogenetic analysis scripts once tested
         
     #if argument is whole genome input data
-    #run through hybpiper
-    #spades assembly
-    #exonerate normal
     if args.whole_genome_data:
         path_to_sequences = args.whole_genome_data
         logging.info('Path to de novo data: '+path_to_sequences)
@@ -114,18 +116,20 @@ def main():
         os.system(runAAcmd)
         logging.info("Running amino acid initial hybpiper scripts")
         os.chdir(out_path)
-        logging.info("Running MSA with muscle")
+        #Run mafft
+        logging.info("Running MSA with Mafft")
         runMuscle = 'sh ~/FM_Intern_Wrap/runmuscle.sh'
         os.system(runMuscle)
         logging.info("MSA complete")
         logging.info("Converting aligned Fasta to Phylip")
+        #converts aligned fastas to phylip
         convert_cmd = 'sh ~/FM_Intern_Wrap/runConverter.sh'
         os.system(convert_cmd) 
         logging.info("Converted fasta files to phylip")
+        #Add phylogenetic analysis scripts once tested
         
-     #if user input is assembly
-    #check if spades, run exonerate
-    #if non-spades assembly, run Claudio's version of exonerate
+        
+    #user input: assemblies
     if args.assemblies:
         path_to_assemblies = args.assemblies
         logging.info('Path to assemblies '+path_to_assemblies)
