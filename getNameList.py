@@ -13,6 +13,8 @@ namelist = []
 #Adds to a list of names
 for i in onlyfiles:
     _index = i.find('_PE')
+    ## (position -1 of the string --> string not found) 
+    if _index != -1:
     currname = (i[:_index])
     if currname not in namelist:
         namelist.append(currname)
