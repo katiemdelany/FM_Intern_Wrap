@@ -147,14 +147,16 @@ def main():
         os.mkdir(out_path)
         logging.info("Create new directory for exonerate hits")
         
-        keyword = 'spades'
+        ## Checks for SPAdes header in assembly fasta files
         for fname in os.listdir(path_to_assemblies):
-            if keyword in fname:
-                #if spades assembly, run exonerate_hits from HybPiper
+            fline=open(fname).readline().rstrip("\n")
+            regex_spades_header =re.search('^>NODE_[0-9]+_length_[0-9]+_cov_[0-9]+',fline)
+            #if spades assembly, run exonerate_hits from HybPiper
+            if regex_spades_header.group(0) in fline:
                 os.chdir(out_path)
                 logging.info("Running HybPiper exonerate on assembly input data for "+fname)
                 os.system('sh ~/FM_Intern_Wrap/spades_exonerate.sh {} {}'.format(path_to_assemblies,path_to_target_aa))
-            elif keyword not in fname:
+            else:
                 os.chdir(out_path)
                 logging.info("Running alternate exonerate script on assembly input data.")
                 #Create alternate assembly script to run version of exonerate
