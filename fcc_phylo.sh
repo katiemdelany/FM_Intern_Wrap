@@ -2,25 +2,25 @@
 #needs testing
 
 #check MAFFT
-if [ $(which mafft) ]
-    then
-      echo "MAFFT ...... OK"
-      EXE_MAFFT=$(which mafft)
-      DIR_MAFFT=${EXE_MAFFT%/*}
-    else
-      until [ -x $DIR_MAFFT/mafft ]
-        do
-          read -p "MAFFT is not found. Please input its installation directory (absolute path, e.g. /usr/bin):      " DIR_MAFFT
-        done
-      echo "MAFFT ...... OK"
-fi
+#if [ $(which mafft) ]
+#    then
+  #    echo "MAFFT found"
+ #     EXE_MAFFT=$(which mafft)
+#      DIR_MAFFT=${EXE_MAFFT%/*}
+  #  else
+ #     until [ -x $DIR_MAFFT/mafft ]
+#        do
+   #       read -p "MAFFT is not found. Please input its installation directory (absolute path, e.g. /usr/bin):      " DIR_MAFFT
+  #      done
+ #     echo "MAFFT ...... OK"
+#fi
 
 #check FASconCAT
 until [ -s $DIR_FASconCAT/FASconCAT*.pl ]
     do
       read -p "DIR_FASconCAT is not found. Please input its installation directory (absolute path, e.g. /home/zf/install/FASconCAT-G):      " DIR_FASconCAT
     done
-echo "FASconCAT ...... OK"
+echo "FASconCAT found"
 
 #Check the threads can be used
 read -p "Please input the number of threads/cores (e.g. 8):      " THREADS
