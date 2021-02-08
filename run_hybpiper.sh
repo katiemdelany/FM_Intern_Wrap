@@ -3,6 +3,7 @@
 ################################
 #run HyPiper with blastx option#
 #if target enrichment or de novo selected#
+#Note: This is run in out_path created in main#
 ################################
 target_file_path=$1
 path_to_dataset=$2
@@ -23,6 +24,9 @@ done < ${path_to_namelist}
 
 #Get the seq_lengths.txt file
 python3 ~/FM_Intern_Wrap/HybPiper/get_seq_lengths.py ${target_file_path} ${path_to_namelist} aa > test_seq_lengths.txt
+
+#Generate heatmap (must be run after get_seq_lengths.py)
+Rscript ~/FM_Intern_Wrap/gene_recovery_heatmap.R test_seq_lengths.txt
 
 
 #Retrieve sequences
