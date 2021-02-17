@@ -20,7 +20,7 @@ grep ">" ${target_path} | sed s/^.*\-// > genelist.txt
 #directory hierarchy
 #sample/gene/sample/sequences/
 
-genelist=`cat genelist.txt`
+genelist=`cat ~/FM_Intern_Wrap/genelist.txt`
 for i in ${spades_path}; do
         name=${i##*/}
         echo Working on $name
