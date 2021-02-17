@@ -16,6 +16,9 @@ done
 #make a genelist
 grep ">" ${target_path} | sed s/^.*\-// > genelist.txt
 
+#directory hierarchy
+#sample/gene/sample/sequences/
+
 genelist=`cat genelist.txt`
 for i in ${spades_path}; do
         name=${i##*/}
