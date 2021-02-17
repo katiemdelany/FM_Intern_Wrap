@@ -14,6 +14,7 @@ for i in ${spades_path}; do
 done
 
 #make a genelist
+#from target sequence
 grep ">" ${target_path} | sed s/^.*\-// > genelist.txt
 
 #directory hierarchy
