@@ -38,7 +38,7 @@ def check_arg(args=None):
 	parser.add_argument('-b', '--target_markers', default= '',
 						help=' Path to fasta files containg all the sequences used to design the bait set, MUST BE A PROTEIN FASTA'
 						)
-	parser.add_argument('-c', '--hybpiper_cpu', default= '4',
+	parser.add_argument('-c', '--hybpiper_cpu', default= '2',
 						help='CPU number used by Hybpiper' 
 						)				
 	parser.add_argument('-cc', '--parallel_exonerate', default= 4,
@@ -108,8 +108,9 @@ def main():
 			for line in f:
 				logging.info("Processing sample:" + line)
 				sample_path = path_to_sequences + '/' + line.rstrip('\n') + '_R*.trimmed_paired.fastq'
-				run_Hybpiper =  '{}/HybPiper/reads_first.py -b {} -r {}  --prefix {} --cpu {} '.format(main_script_dir, args.target_markers, sample_path, line, args.hybpiper_cpu)
-				os.system(run_Hybpiper)	
+				run_Hybpiper =  '{}HybPiper/reads_first.py -b {} -r {}  --prefix {} --cpu {} '.format(main_script_dir, args.target_markers, sample_path, line, args.hybpiper_cpu)
+				os.system(run_Hybpiper)
+		os.chdir(main_script_dir)			
 	"""#if argument is whole genome input data
 	if args.whole_genome_data:
 		path_to_sequences = args.whole_genome_data
@@ -177,6 +178,7 @@ def main():
 		list_of_list = list(itertools.product(pezizo_list, empty_list))
 		print(list_of_list)
 		logging.info("Running exonerate using exonerate_hits.py script from Hybpiper..")	
+		args.parallel_exonerate = int(args.parallel_exonerate)
 		pool = multiprocessing.Pool(processes=args.parallel_exonerate)
 		pool.starmap(run_exonerate_hits, list_of_list)
 		
