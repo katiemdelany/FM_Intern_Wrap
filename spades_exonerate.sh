@@ -32,3 +32,12 @@ for i in ${spades_path}; do
                 done
         echo Done with $name
 done
+
+#create namelist for spades exonerate and add names to list
+touch exonerate_namelist.txt
+for i in ${spades_path}; do
+	name=${i##*/}
+	echo $name >> exonerate_namelist.txt
+done
+
+python3 ~/FM_Intern_Wrap/Hybpiper/get_seq_lengths.py ${target_path} exonerate_namelist.txt aa > test_seq_lengths.txt
