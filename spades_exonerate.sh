@@ -41,3 +41,5 @@ for i in ${spades_path}; do
 done
 
 python3 ~/FM_Intern_Wrap/Hybpiper/get_seq_lengths.py ${target_path} exonerate_namelist.txt aa > test_seq_lengths.txt
+
+python3 ~/FM_Intern_Wrap/Hybpiper/retrieve_sequences.py ${target_path} . aa
