@@ -28,6 +28,39 @@ def run_exonerate_hits(file_, ref_seq_file):
 		os.system("python3 exonerate_alt.py {} --prefix {} {} ".format(ref_seq_file, file_.rstrip("\.fna"), file_))
 	return(file_)
 
+def get_alignment(path_to_data):
+	genes_list = []
+	for root, dirs, files in os.walk(path_to_data, topdown=True):
+		#append any gene to a list, make it a set to eliminate redundancy and then back to a list		
+		for f in files:
+			if f.endswith(".FAA"):
+				genes_list.append(f.rstrip(".FAA"))
+	genes_list = set(genes_list)
+	genes_list = list(genes_list)
+	#print(genes_list)
+	for g in genes_list:
+		logging.info("Building aminoacid alignement for gene {}".format(g))
+		with open("Alignement_" + g + "_protein.fasta",'a+') as alignement:
+			for root, dirs, files in os.walk(path_to_data, topdown=True):
+				for f in files:
+					if f == g + ".FAA":
+						os.chdir(root)
+						with open(f, 'r') as gene:
+							f_content = gene.read()
+							os.chdir(path)
+							alignement.write(f_content)
+	for g in genes_list:
+		logging.info("Building nucleotide alignement for gene {}".format(g))
+		with open("Alignement_" + g + "_nucleotide.fasta",'a+') as alignement:
+			for root, dirs, files in os.walk(path, topdown=True):
+				for f in files:
+					if f == g + ".FNA":
+						os.chdir(root)
+						with open(f, 'r') as gene:
+							f_content = gene.read()
+							os.chdir(path)
+							alignement.write(f_content)
+	return()
 
 def check_arg(args=None):
 	''' 
@@ -75,6 +108,9 @@ def main():
 	#set input dataset directory as variable
 	path_to_sequences = args.target_enrichment_data
 	if args.target_enrichment_data:
+		logging.info("***************************************************************************************")
+		logging.info("* PERFORMING TARGET ENRICHMENT DATA ANALYSIS WITH Hybpiper  *")
+		logging.info("***************************************************************************************")
 		logging.info('Path to TE data: '+path_to_sequences)
 		#logging.info('Created hybpiper directory in test sequence directory')
 		#os.chdir(path_to_sequences)
@@ -156,6 +192,9 @@ def main():
 	#user input: assemblies
 	if args.assemblies:
 		path_to_assemblies = args.assemblies
+		logging.info("*****************************************************************************")
+		logging.info("* PERFORMING ASSEMBLIES DATA ANALYSIS WITH Exonerate  *")
+		logging.info("*****************************************************************************")
 		logging.info('Path to assemblies '+path_to_assemblies)
 		#logging.info('Created hybpiper directory in assembly sequence directory')
 		#os.chdir(path_to_assemblies)
@@ -182,9 +221,13 @@ def main():
 		pool = multiprocessing.Pool(processes=args.parallel_exonerate)
 		pool.starmap(run_exonerate_hits, list_of_list)
 		
-		#os.chdir(out_path)
-		#This will run mafft alignment
-		logging.info("Running MSA with mafft")
+		logging.info("********************************")
+		logging.info("* BUILDING FASTA FILES  *")
+		logging.info("********************************")
+		
+		logging.info("*************************************************")
+		logging.info("* PERFORMING ALIGNMENT WITH Mafft *")
+		logging.info("*************************************************")
 		runMuscle = 'sh ~/FM_Intern_Wrap/runmuscle.sh'
 		os.system(runMuscle)
 		logging.info("MSA complete")
