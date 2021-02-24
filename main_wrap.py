@@ -224,6 +224,9 @@ def main():
 		logging.info("********************************")
 		logging.info("* BUILDING FASTA FILES  *")
 		logging.info("********************************")
+		#############################FROM HERE!! CHECK IF THE get_alignment works!
+		get_alignment(args.target_enrichment_data)
+		get_alignment(args.assemblies)
 		
 		logging.info("*************************************************")
 		logging.info("* PERFORMING ALIGNMENT WITH Mafft *")
