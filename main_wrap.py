@@ -37,7 +37,21 @@ def get_alignment(path_to_data):
 				genes_list.append(f.rstrip(".FAA"))
 	genes_list = set(genes_list)
 	genes_list = list(genes_list)
-	#print(genes_list)
+	print("List of genes found: ", genes_list)
+	os.chdir(path_to_data)
+	for g in genes_list:
+		logging.info("Building nucleotide alignement for gene {}".format(g))
+		with open("Alignement_" + g + "_nucleotide.fasta",'a+') as alignement:
+			for root, dirs, files in os.walk(path_to_data, topdown=True):
+				for f in files:
+					if f == g + ".FNA":
+						os.chdir(root)
+						print("root" + root + f)
+						with open(f, 'r') as gene:
+							f_content = gene.read()
+							os.chdir(path_to_data)
+							print("pathtodata", path_to_data)
+							alignement.write(f_content)	
 	for g in genes_list:
 		logging.info("Building aminoacid alignement for gene {}".format(g))
 		with open("Alignement_" + g + "_protein.fasta",'a+') as alignement:
@@ -45,20 +59,11 @@ def get_alignment(path_to_data):
 				for f in files:
 					if f == g + ".FAA":
 						os.chdir(root)
+						print("root" + root + f)
 						with open(f, 'r') as gene:
 							f_content = gene.read()
-							os.chdir(path)
-							alignement.write(f_content)
-	for g in genes_list:
-		logging.info("Building nucleotide alignement for gene {}".format(g))
-		with open("Alignement_" + g + "_nucleotide.fasta",'a+') as alignement:
-			for root, dirs, files in os.walk(path, topdown=True):
-				for f in files:
-					if f == g + ".FNA":
-						os.chdir(root)
-						with open(f, 'r') as gene:
-							f_content = gene.read()
-							os.chdir(path)
+							os.chdir(path_to_data)
+							print("pathtodata", path_to_data)
 							alignement.write(f_content)
 	return()
 
@@ -97,6 +102,9 @@ def main():
 	#print(args)
 	main_script_dir = os.path.realpath(__file__)
 	main_script_dir = main_script_dir.rstrip("main_wrap.py")
+	print(main_script_dir)
+	print(args.target_enrichment_data)
+	print(args.assemblies)
 	#Clones hybpiper into current directory
 	if args.first_use == True:
 		clone_hybpiper = 'git clone https://github.com/mossmatters/HybPiper.git'
@@ -224,9 +232,10 @@ def main():
 		logging.info("********************************")
 		logging.info("* BUILDING FASTA FILES  *")
 		logging.info("********************************")
-		#############################FROM HERE!! CHECK IF THE get_alignment works!
-		get_alignment(args.target_enrichment_data)
+		logging.info("Building alignments from assemblies data")
 		get_alignment(args.assemblies)
+		logging.info("Building alignments from target enrichment data")
+		get_alignment(args.target_enrichment_data)
 		
 		logging.info("*************************************************")
 		logging.info("* PERFORMING ALIGNMENT WITH Mafft *")
