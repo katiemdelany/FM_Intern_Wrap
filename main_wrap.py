@@ -269,7 +269,7 @@ def main():
 		logging.info("*************************************************")
 		path_to_merged_alignments = args.target_enrichment_data + '../alignments_merged/'
 		#for item in os.listdir(path_to_merged_alignments):
-		run_mafft_parallel = "find %s -type f -name '*_merged.fasta' | parallel -j %s mafft --maxiterate 1000 --localpair -thread 1 {} > {}_maffted.fas    "(path_to_merged_alignments, args.parallel_mafft, )
+		run_mafft_parallel = "find %s -type f -name '*_merged.fasta' | parallel -j %s mafft --maxiterate 1000 --localpair -thread 1 {} > {}_maffted.fas    ".format(path_to_merged_alignments, args.parallel_mafft)
 		os.system(run_mafft_parallel)
 		logging.info("******************************************************************")
 		logging.info("* PERFORMING ALIGNMENT FILTERING WITH Gblocks *")
