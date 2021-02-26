@@ -4,6 +4,7 @@ Main wrapper for running Hybpiper and subsequent analysis.
 Input: Path to target enriched data, whole genome sequencing data, assembly data
 
 '''
+import shutil
 import re
 import os
 import sys
@@ -40,8 +41,8 @@ def get_alignment(path_to_data):
 	print("List of genes found: ", genes_list)
 	os.chdir(path_to_data)
 	for g in genes_list:
-		logging.info("Building nucleotide alignement for gene {}".format(g))
-		with open("Alignement_" + g + "_nucleotide.fasta",'a+') as alignement:
+		logging.info("Building nucleotide alignment for gene {}".format(g))
+		with open("Alignment_" + g + "_nucleotide.FAS",'a+') as alignment:
 			for root, dirs, files in os.walk(path_to_data, topdown=True):
 				for f in files:
 					if f == g + ".FNA":
@@ -51,10 +52,10 @@ def get_alignment(path_to_data):
 							f_content = gene.read()
 							os.chdir(path_to_data)
 							print("pathtodata", path_to_data)
-							alignement.write(f_content)	
+							alignment.write(f_content)	
 	for g in genes_list:
-		logging.info("Building aminoacid alignement for gene {}".format(g))
-		with open("Alignement_" + g + "_protein.fasta",'a+') as alignement:
+		logging.info("Building aminoacid alignment for gene {}".format(g))
+		with open("Alignment_" + g + "_protein.FAS",'a+') as alignment:
 			for root, dirs, files in os.walk(path_to_data, topdown=True):
 				for f in files:
 					if f == g + ".FAA":
@@ -64,7 +65,44 @@ def get_alignment(path_to_data):
 							f_content = gene.read()
 							os.chdir(path_to_data)
 							print("pathtodata", path_to_data)
-							alignement.write(f_content)
+							alignment.write(f_content)
+	return()
+
+def merge_alignments(path_to_assemblies, path_to_target_enrichment):
+	output_path = path_to_target_enrichment + '../'
+	if not os.path.exists('merged_alignments'):
+		os.makedirs(output_path + 'alignments')
+		os.makedirs(output_path + 'alignments_merged')
+	output_path = output_path + 'alignments/'
+	output_path_merged = output_path.rstrip("/") + "_merged/"
+	#print(output_path)
+	for filename in (os.listdir(path_to_assemblies)):
+		if filename.endswith(".FAS"):
+			os.rename(path_to_assemblies + filename , path_to_assemblies + filename.rstrip("FAS") + "assembly.FA")
+	for filename in (os.listdir(path_to_target_enrichment)):
+		if filename.endswith(".FAS"):
+			os.rename(path_to_target_enrichment + filename , path_to_target_enrichment + filename.rstrip("FAS") + "targenrich.FA")
+	for filename in (os.listdir(path_to_assemblies)):
+		if filename.endswith("assembly.FA"):
+			shutil.move(path_to_assemblies + filename , output_path + filename) 
+	for filename in (os.listdir(path_to_target_enrichment)):
+		if filename.endswith("targenrich.FA"):
+			shutil.move(path_to_target_enrichment + filename , output_path + filename)
+	file_list_total = os.listdir(output_path)
+	for index, item in  enumerate(file_list_total):
+		file_list_total[index] = (file_list_total[index]).replace(".targenrich.FA", "")
+		file_list_total[index] = (file_list_total[index]).replace(".assembly.FA", "")	
+	#print(file_list_total)
+	file_list_total = list(set(file_list_total))
+	print(file_list_total)
+	for item in file_list_total:
+		with open(output_path_merged + item + "_merged.fasta", 'a+') as f:
+			for filename in os.listdir(output_path):
+				regex = re.search('(^Alignement_[0-9]+at4890_\w+)\.\w+\.FA$', filename )
+				if item == regex.group(1):
+					my_file = open(output_path + filename, 'r')
+					my_file_content = my_file.read()
+					f.write(my_file_content)
 	return()
 
 def check_arg(args=None):
@@ -76,12 +114,15 @@ def check_arg(args=None):
 	parser.add_argument('-b', '--target_markers', default= '',
 						help=' Path to fasta files containg all the sequences used to design the bait set, MUST BE A PROTEIN FASTA'
 						)
-	parser.add_argument('-c', '--hybpiper_cpu', default= '2',
+	parser.add_argument('-ch', '--hybpiper_cpu', default= '4',
 						help='CPU number used by Hybpiper' 
 						)				
-	parser.add_argument('-cc', '--parallel_exonerate', default= 4,
+	parser.add_argument('-ce', '--parallel_exonerate', default= 4,
 						help='CPU number used to run exonerate in parallel on multiple assemblies' 
-						)				
+						)
+parser.add_argument('-cm', '--parallel_mafft', default= '4',
+						help=' Number of mafft alignments perfomed in parallel using each one thread'
+						)										
 	parser.add_argument('-t', '--target_enrichment_data', default= '',
 						help='path to target enriched data',
 						)
@@ -102,9 +143,9 @@ def main():
 	#print(args)
 	main_script_dir = os.path.realpath(__file__)
 	main_script_dir = main_script_dir.rstrip("main_wrap.py")
-	print(main_script_dir)
-	print(args.target_enrichment_data)
-	print(args.assemblies)
+	#print(main_script_dir)
+	#print(args.target_enrichment_data)
+	#print(args.assemblies)
 	#Clones hybpiper into current directory
 	if args.first_use == True:
 		clone_hybpiper = 'git clone https://github.com/mossmatters/HybPiper.git'
@@ -120,8 +161,6 @@ def main():
 		logging.info("* PERFORMING TARGET ENRICHMENT DATA ANALYSIS WITH Hybpiper  *")
 		logging.info("***************************************************************************************")
 		logging.info('Path to TE data: '+path_to_sequences)
-		#logging.info('Created hybpiper directory in test sequence directory')
-		#os.chdir(path_to_sequences)
 		trimming_cmd = "python3 {}/trimmer.py -f {}".format(main_script_dir, args.target_enrichment_data)
 		os.system(trimming_cmd)
 		#Get namelist.txt from dataset directory
@@ -130,19 +169,6 @@ def main():
 		namelist = 'namelist.txt'
 		path_to_namelist = os.path.join(path_to_sequences,namelist)
 		
-		#Make output directory
-		#out_dir = "hybpiper_TE"
-		#out_path = os.path.join(path_to_sequences,out_dir)
-		#os.mkdir(out_path)
-		
-		#change directory to output directory
-		#os.chdir(out_path)
-		#logging.info("Creating new directory for target enrichment hybpiper")
-		#logging.info('Running amino acid target script')
-		#run blastx version of hybpiper
-		#AAscript = '~FM_Intern_Wrap/run_hybpiper.sh'
-		#runAAcmd = 'sh ~/FM_Intern_Wrap/run_hybpiper.sh ' + path_to_target_aa +' '+ path_to_sequences +' '+ path_to_namelist
-		#os.system(runAAcmd)
 		logging.info("Gunzipping paired reads trimmed fastq archives")
 		gunzip_fastq =' parallel gunzip ::: {}*_paired.fastq.gz'.format(path_to_sequences) 
 		os.system(gunzip_fastq)
@@ -236,20 +262,30 @@ def main():
 		get_alignment(args.assemblies)
 		logging.info("Building alignments from target enrichment data")
 		get_alignment(args.target_enrichment_data)
+		merge_alignments(args.assemblies, args.target_enrichment_data)
 		
 		logging.info("*************************************************")
 		logging.info("* PERFORMING ALIGNMENT WITH Mafft *")
 		logging.info("*************************************************")
-		runMuscle = 'sh ~/FM_Intern_Wrap/runmuscle.sh'
-		os.system(runMuscle)
-		logging.info("MSA complete")
-		#converts aligned fasta files to phylip (may not need this)
-		logging.info("Converting aligned Fasta to Phylip")
-		convert_cmd = 'sh ~/FM_Intern_Wrap/runConverter.sh'
-		os.system(convert_cmd) 
-		logging.info("Converted fasta files to phylip")
-		#Add phylogenetic analysis scripts once tested
-
+		path_to_merged_alignments = args.target_enrichment_data + '../alignments_merged/'
+		#for item in os.listdir(path_to_merged_alignments):
+		run_mafft_parallel = "find %s -type f -name '*_merged.fasta' | parallel -j %s mafft --maxiterate 1000 --localpair -thread 1 {} > {}_maffted.fas    "(path_to_merged_alignments, args.parallel_mafft, )
+		os.system(run_mafft_parallel)
+		logging.info("******************************************************************")
+		logging.info("* PERFORMING ALIGNMENT FILTERING WITH Gblocks *")
+		logging.info("******************************************************************")
+		logging.info("**************************************************************************")
+		logging.info("* RECONSTRUCTING SINGLE MARKER TREES WITH RAxML *")
+		logging.info("**************************************************************************")
+		logging.info("******************************************************************************")
+		logging.info("* PERFORMING ALIGNMENT CONCATENATION WITH Fasconcat  *")
+		logging.info("******************************************************************************")
+		logging.info("********************************************************************************************")
+		logging.info("* RECONSTRUCTING SUPERMATRIX TREE WITH RAxML  *")
+		logging.info("********************************************************************************************")
+		logging.info("******************************************************************************************")
+		logging.info("* RECONSTRUCTION SUPERTREE WITH ASTRAL *")
+		logging.info("******************************************************************************************")
 if __name__=='__main__':
 	logger = logging.getLogger(__name__)
 	logFormatter = '%(message)s'
