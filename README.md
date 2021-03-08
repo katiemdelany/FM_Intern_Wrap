@@ -1,5 +1,7 @@
 # FM_Intern_Wrap
 
+Please see [wiki](https://github.com/katiemdelany/FM_Intern_Wrap/wiki)
+
 ### Languages and Packages
 
 ### Software Required
