@@ -1,6 +1,6 @@
 # FM_Intern_Wrap
 
-## For more information and instructions, please see our [wiki!](https://github.com/katiemdelany/FM_Intern_Wrap/wiki)
+### For more information and instructions, please see our [wiki](https://github.com/katiemdelany/FM_Intern_Wrap/wiki)!
 
 ### Languages and Packages
 
